@@ -1,0 +1,18 @@
+extends layout
+
+block header
+  a.ui-btn-right#nowPlaying(href="/", data-icon="arrow-r", style="display: none", data-iconpos="right") Now playing
+
+block body
+
+  div(data-role="content", style="padding: 15px")
+    ul(data-role="listview", data-divider-theme="c", data-inset="true")
+      - if (locals.stations)
+          each station, index in locals.stations
+            li: a.station(href="/stations/#{station.name}/", data-station-name="#{station.name}")= station.name
+
+
+  script(type="text/javascript")
+    $(document).one('pageshow', '#rayPage', function() {
+      ray.home.init();
+    });

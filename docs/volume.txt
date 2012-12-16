@@ -1,0 +1,1 @@
+amixer -c 0 sset PCM playback 70%

@@ -1,0 +1,26 @@
+{
+    "name":        "ray",
+    "homepage":    "https://github.com/vadimi/ray",
+    "version":     "0.1.0",
+    "author":      "Vadzim Ivanou",
+    "keywords":    "radio nodejs raspberry",
+    "description": "A simple web based radio streaming service for Raspberry Pi. Wrapper for mpg123",
+    "licenses":     [{
+        "type":       "MIT",
+        "url":        "http://www.opensource.org/licenses/mit-license.php"
+    }],
+
+    "repository" : {
+        "type" : "git",
+        "url" : "http://github.com/vadimi/ray.git"
+    },
+
+    "dependencies": {
+        "coffee-script": "1.3.3",
+        "moment": "1.7.x",
+        "express": "2.x",
+        "winston": "0.6.2",
+        "jade": "0.27.x",
+        "socket.io": "0.9.x"
+    }
+}

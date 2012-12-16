@@ -1,0 +1,76 @@
+extends layout
+
+block header
+  a(href="/", data-icon="grid", data-iconpos="notext")
+
+block navigation
+  div(data-role="navbar")
+    ul
+      li: a#stationButton.ui-btn-active(href="#") Station
+      li: a#artistButton(href="#") Artist
+      li: a#trackButton(href="#") Track
+
+block body
+  - var displayStation = current.hasData ? "block" : "none";
+  - var displayNothing = current.hasData ? "none" : "block";
+  - var currentHref = current.url != null && current.url.length > 0 ? current.url : "#";
+  - var playButtonClass = current.playing ? "ui-btn-active" : "";
+  - var stopButtonClass = current.playing ? "" : "ui-btn-active";
+
+  div#nothing(style="display: #{displayNothing}"): h2 Nothing is currently playing.
+  div#artist(style="display: none")
+    div.artistImage
+      img#artistImage
+    div#artistContent
+
+  div#listenPage(style="display: #{displayStation}")
+    h2#stationName= current.name
+    p
+      div(data-role="fieldcontain")
+        b Url:&nbsp;
+        a#stationUrl(href="#{currentHref}")= current.url
+      div(data-role="fieldcontain")
+        b Title:&nbsp;
+        span#trackTitle= current.title
+      div(data-role="fieldcontain")
+        b Length:&nbsp;
+        span#time
+  div(data-role="fieldcontain")
+    fieldset(data-role="controlgroup", data-type="horizontal")
+      a#playButton(href='#', class="#{playButtonClass}", data-role="button", name="control", data-icon="play") Play
+      a#stopButton(href='#', class="#{stopButtonClass}", data-role="button", name="control", data-icon="stop") Stop
+
+  script(type="text/javascript")
+    $(document).one('pageshow', '#rayPage', function() {
+      ray.listener.init('#{apiKey}');
+    });
+
+  script#stationTemplate(type="text/template")
+    |<h2><%= name %></h2>
+    |<p>
+    |  <div data-role="fieldcontain">
+    |    <b>Url:&nbsp;</b>
+    |    <a href="currentHref"><%= url %></a>
+    |  </div>
+    |  <div data-role="fieldcontain">
+    |    <b>Title:&nbsp;</b>
+    |    <span><% if (artist) print(artist + " - ") %><%= track %></span>
+    |  </div>
+    |  <div data-role="fieldcontain">
+    |   <b>Length:&nbsp;</b>
+    |    <span id="time"><% if (time) print(time) %></span>
+    |  </div>
+    |<p>
+
+  script#artistTemplate(type="text/template")
+    |<h2>
+    |<% if (loading) print("Loading data for ") %>
+    |<%= artist %>
+    |<% if (loading) print(" ...") %>
+    |</h2>
+    |<div class="artistImage">
+    | <img src='<%= getMediumImage() %>'/>
+    |</div>
+    |<div>
+    |<% if (bio && bio.content) print(bio.content) %>
+    |</div>

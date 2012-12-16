@@ -1,0 +1,10 @@
+{
+    "stations":
+        [
+            { "name": "Radio Ultra 256", "url": "http://94.25.53.133:80/ultra-320" },
+            { "name": "AH FM", "url": "http://us2.ah.fm" },
+            { "name": "Transmission", "url": "http://online.radiorecord.ru:8102/tm_128" },
+            { "name": "Chill Out", "url": "http://online.radiorecord.ru:8102/chil_128" },
+            { "name": "Pirate Station", "url": "http://online.radiorecord.ru:8102/ps_128" }
+        ]
+}
